@@ -11,23 +11,23 @@ import { Transform } from 'stream'
 sourceMap.install({
   retrieveFile: function (path) {
     if (cache[path]) {
-      return cache[path].contents.toString();
+      return cache[path].contents.toString()
     }
   }
-});
+})
 
 
 let cache = {};
-let originalLoader = Module._extensions['.js'];
+let originalLoader = Module._extensions['.js']
 
 Module._extensions['.js'] = function (module, filename) {
-  let file = cache[filename];
+  let file = cache[filename]
   if (file) {
-    module._compile(file.contents.toString(), filename);
+    module._compile(file.contents.toString(), filename)
   } else {
-    originalLoader.apply(this, arguments);
+    originalLoader.apply(this, arguments)
   }
-};
+}
 
 let originalModuleResolve = Module._resolveFilename
 
@@ -38,15 +38,15 @@ Module._resolveFilename = function (request, parent, isMain) {
   } else {
     return originalModuleResolve.apply(this, arguments)
   }
-};
+}
 
 
 export let gulpPipe = function () {
   return through2.obj(function (file, enc, cb) {
     cache[file.path] = file;
     return cb(null, file);
-  });
-};
+  })
+}
 
 export interface fileObject {
   path: string

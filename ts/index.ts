@@ -40,11 +40,10 @@ Module._resolveFilename = function (request, parent, isMain) {
   }
 }
 
-
 export let gulpPipe = function () {
   return through2.obj(function (file, enc, cb) {
-    cache[file.path] = file;
-    return cb(null, file);
+    cache[file.path] = file
+    return cb(null, file)
   })
 }
 

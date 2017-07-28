@@ -17,7 +17,7 @@ console.log('this console comment was injected')
 })
 
 tap.test('should log hi to console', async () => {
-  require(path.join(__dirname, 'hi.js'))
+  require(path.join(__dirname, 'hi'))
 })
 
 tap.start()

@@ -1,5 +1,5 @@
 # gitzone standard
-image: hosttoday/ht-docker-node:npmts
+image: hosttoday/ht-docker-node:npmci
 
 stages:
 - test

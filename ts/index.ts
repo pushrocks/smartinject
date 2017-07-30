@@ -37,13 +37,19 @@ let originalModuleResolve = Module._resolveFilename
 
 Module._resolveFilename = function (request, parent, isMain) {
   let resolvedRequest: string
-  if (parent) {
-    let parsedIdDir = path.parse(parent.id).dir
-    resolvedRequest = path.join('/', parent.id, request)
+  if (parent && /^\./.test(request)) {
+    let resolvedDir = path.parse(parent.filename).dir
+    resolvedRequest = path.join('/', resolvedDir, request)
   } else {
     resolvedRequest = request
   }
-  // console.log('resolvedRequest:' + resolvedRequest)
+
+  // uncomment for testing
+  /* if (/[yourTestFilenameHere.js]/.test(request)) {
+    console.log('resolvedRequest:' + resolvedRequest)
+    console.log(parent)
+  } */
+
   let file = cache[resolvedRequest]
   let file2 = cache[resolvedRequest + '.js']
   if (file || file2) {

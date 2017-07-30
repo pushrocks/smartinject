@@ -10,6 +10,7 @@ tap.test('should inject a file using fileArray', async () => {
       path: path.join(__dirname, 'hi.js'),
       contents: new Buffer(
         `require('./hi2.js')
+require('through2')
 console.log('this console comment was injected')
 `)
     }

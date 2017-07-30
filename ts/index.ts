@@ -53,7 +53,7 @@ Module._resolveFilename = function (request, parent, isMain) {
   let file = cache[resolvedRequest]
   let file2 = cache[resolvedRequest + '.js']
   if (file || file2) {
-    return request
+    return resolvedRequest
   } else {
     return originalModuleResolve.apply(this, arguments)
   }
@@ -73,7 +73,9 @@ export interface fileObject {
 
 export let injectFileArray = async (fileArray: fileObject[]) => {
   for (let fileObject of fileArray) {
-    // console.log('injected:' + fileObject.path)
+    /* if (/[yourTestFilenameHere.js]/.test(request)) {
+      // console.log('injected:' + fileObject.path)
+    } */
     cache[fileObject.path] = fileObject
   }
   return fileArray

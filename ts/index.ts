@@ -80,3 +80,9 @@ export let injectFileArray = async (fileArray: fileObject[]) => {
   }
   return fileArray
 }
+
+export let getFileString = (filePathArg: string) => {
+  if (cache[filePathArg]) {
+    return cache[filePathArg].contents.toString()
+  }
+}

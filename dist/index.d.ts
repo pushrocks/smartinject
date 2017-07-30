@@ -7,3 +7,4 @@ export interface fileObject {
     contents: Buffer;
 }
 export declare let injectFileArray: (fileArray: fileObject[]) => Promise<fileObject[]>;
+export declare let getFileString: (filePathArg: string) => any;

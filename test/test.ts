@@ -21,4 +21,9 @@ tap.test('should log hi to console', async () => {
   require(path.join(__dirname, 'hi.js'))
 })
 
+tap.test('should get a string for a filePath', async () => {
+  let fileString = smartinject.getFileString(path.join(__dirname, 'hi.js'))
+  console.log(fileString)
+})
+
 tap.start()

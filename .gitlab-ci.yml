@@ -1,6 +1,11 @@
 # gitzone standard
 image: hosttoday/ht-docker-node:npmci
 
+cache:
+  paths:
+  - .yarn/
+  key: "$CI_BUILD_STAGE"
+
 stages:
 - test
 - release
@@ -51,13 +56,17 @@ trigger:
     - docker
 
 pages:
-  image: hosttoday/ht-docker-node:npmpage
+  image: hosttoday/ht-docker-node:npmci
   stage: pages
   script:
-    - npmci command npmpage --publish gitlab
+    - npmci command yarn global add npmpage
+    - npmci command npmpage
+  tags:
+    - docker
   only:
     - tags
   artifacts:
     expire_in: 1 week
     paths:
     - public
+  allow_failure: true

@@ -36,8 +36,9 @@ Module._extensions['.js'] = function (module, filename) {
 let originalModuleResolve = Module._resolveFilename
 
 Module._resolveFilename = function (request, parent, isMain) {
-  let file = cache[request]
-  let file2 = cache[request + '.js']
+  let resolvedRequest = path.resolve(parent.id, request)
+  let file = cache[resolvedRequest]
+  let file2 = cache[resolvedRequest + '.js']
   if (file || file2) {
     return request
   } else {

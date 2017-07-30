@@ -1,6 +1,6 @@
 {
   "name": "smartinject",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "inject modules into node",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",

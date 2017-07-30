@@ -36,9 +36,9 @@ Module._extensions['.js'] = function (module, filename) {
 let originalModuleResolve = Module._resolveFilename
 
 Module._resolveFilename = function (request, parent, isMain) {
-  let parsedIdDir = path.parse(parent.id).dir
   let resolvedRequest: string
   if (parent) {
+    let parsedIdDir = path.parse(parent.id).dir
     resolvedRequest = path.join('/', parent.id, request)
   } else {
     resolvedRequest = request

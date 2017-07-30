@@ -37,7 +37,8 @@ let originalModuleResolve = Module._resolveFilename
 
 Module._resolveFilename = function (request, parent, isMain) {
   let parsedIdDir = path.parse(parent.id).dir
-  let resolvedRequest = path.resolve(parsedIdDir, request)
+  let resolvedRequest = path.join('/', parent.id, request)
+  // console.log('resolvedRequest:' + resolvedRequest)
   let file = cache[resolvedRequest]
   let file2 = cache[resolvedRequest + '.js']
   if (file || file2) {
@@ -61,6 +62,7 @@ export interface fileObject {
 
 export let injectFileArray = async (fileArray: fileObject[]) => {
   for (let fileObject of fileArray) {
+    // console.log('injected:' + fileObject.path)
     cache[fileObject.path] = fileObject
   }
   return fileArray

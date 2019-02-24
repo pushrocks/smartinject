@@ -1,8 +1,6 @@
 {
   "npmci": {
-    "globalNpmTools": [
-      "npmts"
-    ]
+    "globalNpmTools": []
   },
   "gitzone": {
     "module": {

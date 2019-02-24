@@ -9,8 +9,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "tsrun test/test.ts",
-    "build": "(npmts --nocoverage)"
+    "test": "tstest test/",
+    "build": "(tsbuild)"
   },
   "repository": {
     "type": "git",
@@ -33,7 +33,9 @@
     "through2": "^3.0.0"
   },
   "devDependencies": {
+    "@gitzone/tsbuild": "^2.1.8",
     "@gitzone/tsrun": "^1.1.17",
+    "@gitzone/tstest": "^1.0.18",
     "@pushrocks/tapbundle": "^3.0.7",
     "@types/node": "^11.9.5",
     "tslint": "^5.13.0",

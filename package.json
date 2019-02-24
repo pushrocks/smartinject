@@ -1,5 +1,6 @@
 {
-  "name": "smartinject",
+  "name": "@pushrocks/smartinject",
+  "private": false,
   "version": "1.0.15",
   "description": "inject modules into node",
   "main": "dist/index.js",
@@ -8,7 +9,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "(npmts --nocoverage)"
+    "test": "tsrun test/test.ts",
+    "build": "(npmts --nocoverage)"
   },
   "repository": {
     "type": "git",
@@ -25,13 +27,14 @@
   },
   "homepage": "https://gitlab.com/pkunz/smartinject#README",
   "dependencies": {
-    "@types/source-map-support": "^0.4.0",
-    "@types/through2": "^2.0.33",
-    "source-map-support": "^0.4.15",
-    "through2": "^2.0.3",
-    "typings-global": "^1.0.20"
+    "@types/source-map-support": "^0.4.2",
+    "@types/through2": "^2.0.34",
+    "source-map-support": "^0.5.10",
+    "through2": "^3.0.0"
   },
   "devDependencies": {
-    "tapbundle": "^1.1.1"
+    "@gitzone/tsrun": "^1.1.17",
+    "@pushrocks/tapbundle": "^3.0.7",
+    "@types/node": "^11.9.5"
   }
 }

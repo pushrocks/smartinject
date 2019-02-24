@@ -3,5 +3,15 @@
     "globalNpmTools": [
       "npmts"
     ]
+  },
+  "gitzone": {
+    "module": {
+      "githost": "gitlab.com",
+      "gitscope": "pushrocks",
+      "gitrepo": "smartinject",
+      "shortDescription": "inject modules into node",
+      "npmPackagename": "@pushrocks/smartinject",
+      "license": "MIT"
+    }
   }
 }

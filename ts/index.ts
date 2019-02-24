@@ -1,21 +1,21 @@
-import * as through2 from 'through2'; 
+import * as through2 from 'through2';
 import { cache } from './injection';
 import { Transform } from 'stream'; // needed for types
 
-export let gulpPipe = function() {
-  return through2.obj(function(file, enc, cb) {
+export const gulpPipe = () => {
+  return through2.obj((file, enc, cb) => {
     cache[file.path] = file;
     return cb(null, file);
   });
 };
 
-export interface fileObject {
+export interface IFileObject {
   path: string;
   contents: Buffer;
 }
 
-export let injectFileArray = async (fileArray: fileObject[]) => {
-  for (let fileObject of fileArray) {
+export const injectFileArray = async (fileArray: IFileObject[]) => {
+  for (const fileObject of fileArray) {
     /* if (/[yourTestFilenameHere.js]/.test(request)) {
       // console.log('injected:' + fileObject.path)
     } */
@@ -24,7 +24,7 @@ export let injectFileArray = async (fileArray: fileObject[]) => {
   return fileArray;
 };
 
-export let getFileString = (filePathArg: string) => {
+export const getFileString = (filePathArg: string) => {
   if (cache[filePathArg]) {
     return cache[filePathArg].contents.toString();
   }

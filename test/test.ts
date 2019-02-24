@@ -27,12 +27,10 @@ tap.test('should get a string for a filePath from a .js file', async () => {
   console.log(fileString);
 });
 
-tap.test('should accept a typescript registration', async () => {
-  
-})
+tap.test('should accept a typescript registration', async () => {});
 
 tap.test('should get a string for a file path from a .ts file', async () => {
   let fileString = smartinject.getFileString(path.join(__dirname, 'typescript.example.ts'));
-})
+});
 
 tap.start();

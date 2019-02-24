@@ -1,18 +1,18 @@
-let Module = require('module');
+const Module = require('module');
 import path = require('path');
 import sourceMap = require('source-map-support');
 
 import vm = require('vm');
 
 export const cache = {};
-export const extensionMap: {[key: string]: () => string} = {}
-let originalLoader = Module._extensions['.js'];
+export const extensionMap: { [key: string]: () => string } = {};
+const originalLoader = Module._extensions['.js'];
 
 /**
  * ensure sourcemap support works with the cache
  */
 sourceMap.install({
-  retrieveFile: function(path) {
+  retrieveFile: (path) => {
     if (cache[path]) {
       return cache[path].contents.toString();
     } else if (cache[path + '.js']) {
@@ -22,8 +22,8 @@ sourceMap.install({
 });
 
 Module._extensions['.js'] = function(module, filename) {
-  let file = cache[filename];
-  let file2 = cache[filename + '.js'];
+  const file = cache[filename];
+  const file2 = cache[filename + '.js'];
   if (file) {
     module._compile(file.contents.toString(), filename);
   } else if (file2) {
@@ -33,11 +33,11 @@ Module._extensions['.js'] = function(module, filename) {
   }
 };
 
-for (let extension in extensionMap) {
-  if(extensionMap[extension]) {
+for (const extension in extensionMap) {
+  if (extensionMap[extension]) {
     Module._extensions[extension] = function(module, filename) {
-      let file = cache[filename];
-      let file2 = cache[filename + '.ts'];
+      const file = cache[filename];
+      const file2 = cache[filename + '.ts'];
       if (file) {
         module._compile(file.contents.toString(), filename);
       } else if (file2) {
@@ -49,12 +49,12 @@ for (let extension in extensionMap) {
   }
 }
 
-let originalModuleResolve = Module._resolveFilename;
+const originalModuleResolve = Module._resolveFilename;
 
 Module._resolveFilename = function(request, parent, isMain) {
   let resolvedRequest: string;
   if (parent && /^\./.test(request)) {
-    let resolvedDir = path.parse(parent.filename).dir;
+    const resolvedDir = path.parse(parent.filename).dir;
     resolvedRequest = path.join('/', resolvedDir, request);
   } else {
     resolvedRequest = request;
@@ -66,8 +66,8 @@ Module._resolveFilename = function(request, parent, isMain) {
     console.log(parent)
   } */
 
-  let file = cache[resolvedRequest];
-  let file2 = cache[resolvedRequest + '.js'];
+  const file = cache[resolvedRequest];
+  const file2 = cache[resolvedRequest + '.js'];
   if (file || file2) {
     return resolvedRequest;
   } else {
